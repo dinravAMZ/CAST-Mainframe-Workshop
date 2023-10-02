@@ -119,5 +119,5 @@ You can document and save that view for others and export the list of objects in
 
 You can check the structural flaws on the data call graph of in the right-hand menu -- those are best practices to share with the development teams modularizing the call graph benefiting from this transformation to improve the future microservice's Performance, Robustness and Security: 
 
-![Express Critical Flaws](/images/Express_???????.png)
+![Express Critical Flaws](/images/Express_Flaws.png)
 **Using CAST Imaging, you have easily identified the candidates for transformation and the next optimization opportunities to improve the next-gen application.** 

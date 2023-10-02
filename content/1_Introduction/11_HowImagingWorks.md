@@ -28,8 +28,8 @@ This workshop will not cover the production of CAST Imaging dashboard involving 
 
 ![How Imaging Works](/images/howImagingWorks_features.png)
 
-
-
+## App-to-app dependencies
+{{< youtube Q552_E5rMXQ >}}
 
 
 
