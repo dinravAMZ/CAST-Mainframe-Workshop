@@ -1,0 +1,123 @@
+---
+title: "Modernize a monolith"
+chapter: true
+weight: 3
+---
+
+# Modernize a monolithic application  
+
+**Objective**: Understanding the inner structure of an application is key to prepare the best modernization strategy. In this exercise, you will discover a distributed application involving a Java web front-end and a back-end in COBOL/DB2 to identify the best modernization approach. 
+
+## Application Discovery 
+
+You will now switch to application named ***Express***. 
+
+If you just logged in CAST Imaging, you will land on the Welcome Page where you see the number of lines of code, objects, transactions, data call graphs etc. It gives an overview of the complexity of the application. 
+
+Then click on the _Imaging Menu_ on the left hand side to switch to architecture view. 
+
+![App Modernization](/images/Express_LOC.png)
+
+Position the view at the Level 4 displaying the business logic layer, data access layer, etc. as well as the links between the layers including the number of 'sub-nodes' inside each of them. 
+
+You can see all the techonologies and frameworks composing this application, and understand how the Business Logic is accessing the Database Layer, what composes the Presentation Layer, and the architecture specifics (batches, coordination layers, legacy frameworks, etc.) 
+
+![Application Discovery Level 4](/images/Express_Level4.PNG)
+
+Position now to Level 5 to display the object types composing the application.   
+
+> :bulb: **Tip:** Another way to drill down from Level 4 to Level 5 is to double click on a node (Database layer for instance). 
+
+***Express*** is composed of
+* a Presentation Layer with JavaScript, HTML and JSP Pages  
+* Struts and Java with Log4j as logging framework   
+* a COBOL backend accessed only by the Java Classes  
+* a DB2 Data Layer with DB2 Views, DB2 Tables and DB2 Triggers. 
+
+![Express Discovery Level 5](/images/Express_Level5.png)
+
+**You now have, rapidly in a few clicks, pinpointed valuable insights on the application:** 
+* Source Code size and list of technology stacks 
+* How the technology stacks interact 
+* Data Layer consumption mechanisms 
+* Architecture Design 
+
+## Determine the quick-win approach
+
+Double-click on the link between the ***Java Classes*** node and the ***Cobol Programs*** node. 
+
+![Express Java Cobol](/images/Express_JavaCobol.png)
+
+You can see that one Java Class is calling one Cobol Program.
+
+The one-to-one design is actually a good fit to create an API so that the Java can be migrated safely without being dependent on the Cobol Layer. 
+
+![Express Java Cobol](/images/Express_JavaCobol2.png)
+
+You can also visualize the source code to identify the mechanism used. 
+
+![Express Java Cobol](/images/Express_JavaCobol3.png)
+
+**You now have the key start and end points to consider when building an API from Java to Cobol, hence unlocking the migration by removing the hardcoded dependency to Cobol.** 
+
+## Modernize further while on Cloud 
+
+Now you will study the feasibility of modernizing the Cobol layer while the rest of the application has already been migrated to the cloud, thanks to the API that was built between the Java and the Cobol back-ends. 
+
+The strategy would be to decouple the Cobol layer towards a modular architecture, but there are different approaches to modularization. In the next exercise, you will explore one of those approaches. 
+
+### Modularize from the Data Layer 
+
+CAST Imaging generates the call graph from Data sources to UI and from UI down to data sources. You can use those views and generate reports to identify which transactions are isolated, which ones have many calls to the tables and views and the nagture of those calls (Insert/Update/Delete). 
+
+Generate the report from the right-hand menu and select the Reports on "Data Sources", then "Number of linked Transactions per Data Sources". 
+
+![Express Java Cobol](/images/Express_Report.png)
+![Express Java Cobol](/images/Express_Report2.png)
+
+The report will alow you to filter Data Sources by number of SELECT/UPDATE/DELETE. 
+
+It appears that the View ***VDPM14AGHI_TMPLT*** is only involved in transactions making SELECT statements. This view and the related table would be a good quick win candidate for a microservice implementation. 
+
+![Express Java Cobol](/images/Express_Report3.png)
+
+You were able to observe from the discovery section of the ***Express*** application that References are going from the Views to the Tables. Copy the name of VDPM14AGHI_TMPLT to search it in the Imaging global search and display it on a view:
+![Express Java Cobol](/images/Express_Search.png)
+
+Right click and add the linked objects to dusplay the dependent tables. 
+
+Another way to get the information is to display the source code of the view.
+![Express Java Cobol](/images/Express_View.png)
+![Express Java Cobol](/images/Express_ViewCode.png)
+
+Now you know which table to search in the list of DataCall graphs generated by CAST Imaging on the left-hand menu. 
+
+![Express Java Cobol](/images/Express_DataCG.png)
+![Express Java Cobol](/images/Express_DataCG2.png)
+
+You are now able to vizualize the skeleton of the call graph from TDPM14AMCA_TMPLT up to UI objects. Click on ***Objects*** to detail the view with the object names. 
+![Express Java Cobol](/images/Express_DataCG3.png)
+
+Now you need to check how many calls are done towards that Data Call graph; indeed, if we isolate the components part of this datacall graph in a separate module/microservice, the dependencies external from the graph will need to be addressed. 
+
+Use CTRL+Click to select all objects on the call graph and search for Callers.
+![Express Java Cobol](/images/Express_DataSelect.png)
+
+Then Right-Click to display the contextual menu and **Add** > **Callers** on the view. 
+You can see right away that there are no callers to the objects in the data call graph, so the transformation into a separate microservice should be straightforward. 
+![Express Java Cobol](/images/Express_DataSelect2.png)
+
+You can document and save that view for others and export the list of objects in an Excel report. 
+![Express Java Cobol](/images/Express_SaveView.png)
+
+**You have quickly gathered reports and steps in CAST Imaging which can be repeated to identify the next candidates for modularsation based on the Data Sources.** 
+
+### Optimize application source code 
+> :bulb: **Tip:** CAST Imaging provides a visualization of the Structural Flaws detected in the application code, concerning Performance, Robustness and Security, based on the ISO-5055 Standard.  
+
+[CAST Technologies Documentation (castsoftware.com)](http://technologies.castsoftware.com/rules) 
+
+You can check the structural flaws on the data call graph of in the right-hand menu -- those are best practices to share with the development teams modularizing the call graph benefiting from this transformation to improve the future microservice's Performance, Robustness and Security: 
+
+![Express Critical Flaws](/images/Express_???????.png)
+**Using CAST Imaging, you have easily identified the candidates for transformation and the next optimization opportunities to improve the next-gen application.** 
