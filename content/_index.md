@@ -1,10 +1,10 @@
 --- 
-title: "Modernize Applications to AWS Architectures with CAST Imaging" 
+title: "Modernize Mainframe Applications to AWS with CAST Imaging" 
 chapter: true 
 weight: 1 
 --- 
 
-# Modernize Applications to AWS Architectures with CAST Imaging
+# MODERNIZE MAINFRAME APPLICATIONS TO AWS WITH CAST IMAGING 
 
 ![CAST Logo](/images/CAST_Logo.png) 
 
@@ -20,10 +20,10 @@ CAST Imaging also provides visibility of the adherence between applications: API
 
 ## Workshop Objectives 
 
-In this workshop, you will learn how to use CAST Imaging to navigate the technical architecture of custom applications, helping you to determine how to integrate AWS services in a rapid and safe way. 
+In this workshop, you will learn how to use CAST Imaging to navigate the technical architecture of Mainframe applications, helping you to determine how to modernize them to and on AWS in a faster and safer way.
 
 {{% notice info %}}
-This workshop will cover the consumption of CAST Imaging dashboard through practical exercises utilizing existing applications and highlighting the benefits of CAST insights in Application Modernization context.
+This workshop will cover the consumption of CAST Imaging dashboard through practical exercises utilizing existing applications and highlighting the benefits of CAST insights in Mainframe Modernization context.
 This workshop will not cover the production of CAST Imaging dashboard involving the reverse-engineering of the application source code.
 {{% /notice %}}
 
@@ -35,13 +35,13 @@ Executing this workshop to completion does not require any specific skills. The 
 
 1. How CAST Imaging works
 
-2. Application Discovery
+2. Workshop Prerequisites and Documentation 
 
 3. Exercises on three modernization scenarios
 
-4. Wrap-up
+4. Workshop Wrap-up
 
-
+5. Useful Tools
 
 ### Resources requirements and cost
 

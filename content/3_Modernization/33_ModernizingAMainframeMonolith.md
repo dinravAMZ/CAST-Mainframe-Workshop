@@ -22,7 +22,7 @@ Position the view at the Level 4 displaying the business logic layer, data acces
 
 You can see all the techonologies and frameworks composing this application, and understand how the Business Logic is accessing the Database Layer, what composes the Presentation Layer, and the architecture specifics (batches, coordination layers, legacy frameworks, etc.) 
 
-![Application Discovery Level 4](/images/Express_Level4.PNG)
+![Application Discovery Level 4](/images/Express_Level4.png)
 
 Position now to Level 5 to display the object types composing the application.   
 
